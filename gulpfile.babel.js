@@ -41,7 +41,7 @@ gulp.task('styles', () =>
 
 var testFiles = glob.sync('src/scripts/**/*.jsx');
 var browserwatch = watchify(browserify({ entries: testFiles, extensions: ['.jsx'], cache: {}, packageCache: {} }, { delay: 500 }));
-browserwatch.transform(babelify, { presets: ['env', 'react', 'stage-0'] });
+browserwatch.transform(babelify, { presets: ['env', 'react'] });
 
 
 function bundle() {
@@ -97,19 +97,19 @@ gulp.task('apply-prod-environment', function() {
 gulp.task('watch', function() {
 
   // Watch .scss files
-  gulp.watch('src/styles/**', gulp.series('styles'));
+  gulp.watch('src/styles/**/*.css', gulp.series('styles'));
 
   // Watch .js files
   // gulp.watch('src/scripts/**/*.jsx', ['scripts', 'minscripts']);
 
   // // Watch image files
-  // gulp.watch('src/images/*', ['images']);
+  // gulp.watch('src/images/*', ['images']); 
 
   // Create LiveReload server
   livereload.listen();
 
   // Watch any files in dist/, reload on change
-  gulp.watch('dist/**').on('change', livereload.changed);
+  gulp.watch(['dist/**']).on('change', livereload.changed);
 });
 
-gulp.task('default', gulp.series('clean'/*, 'apply-prod-environment'*/, gulp.parallel('styles', 'scripts'), 'watch'));
+gulp.task('default', gulp.series('clean'/*, 'apply-prod-environment'*/, 'styles', gulp.parallel('scripts', 'watch')));
