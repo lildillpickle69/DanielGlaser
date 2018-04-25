@@ -1,3 +1,5 @@
 import App from './App';
+import HomePage from './HomePage';
+import Resume from './Resume';
 
-export { App };
+export { App, HomePage, Resume };

@@ -16,6 +16,7 @@ import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
 import glob from 'glob';
 import log from 'fancy-log';
+import concat from 'gulp-concat-css';
 
 //html
 // gulp.src('src/html/**/*.html')
@@ -28,6 +29,16 @@ const plugins = [
   cssnano()
 ];
 gulp.task('styles', () =>
+  gulp.src('src/styles/**/*.css')
+    .pipe(sourcemaps.init())
+    .pipe(postcss(plugins))
+    .pipe(concat('stylesheet.min.css'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/styles/'))
+    .pipe(notify({ message: 'Styles task complete' }))
+    .pipe(livereload()));
+
+gulp.task('fonts', () =>
   gulp.src('src/styles/**/*.css')
     .pipe(sourcemaps.init())
     .pipe(postcss(plugins))
