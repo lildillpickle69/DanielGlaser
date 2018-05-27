@@ -64763,7 +64763,61 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _reactDom2.default.render(_react2.default.createElement(_views.App, null), document.getElementById('main'));
 
-},{"./views":801,"react":541,"react-dom":515}],789:[function(require,module,exports){
+},{"./views":807,"react":541,"react-dom":515}],789:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Price = function Price(_ref) {
+  var price = _ref.price,
+      change = _ref.change,
+      direction = _ref.direction;
+  return _react2.default.createElement(
+    _semanticUiReact.Container,
+    { text: true, textAlign: 'center' },
+    _react2.default.createElement(
+      _semanticUiReact.Statistic,
+      null,
+      _react2.default.createElement(
+        _semanticUiReact.Statistic.Value,
+        null,
+        '$',
+        price
+      ),
+      _react2.default.createElement(
+        _semanticUiReact.Statistic.Label,
+        null,
+        change,
+        '%',
+        _react2.default.createElement(_semanticUiReact.Icon, { name: 'chevron ' + direction })
+      )
+    )
+  );
+};
+
+Price.propTypes = {
+  price: _propTypes2.default.number.isRequired,
+  change: _propTypes2.default.number.isRequired,
+  direction: _propTypes2.default.oneOf(['up', 'down']).isRequired
+};
+
+exports.default = Price;
+
+},{"prop-types":511,"react":541,"semantic-ui-react":660}],790:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64786,7 +64840,7 @@ var Quote = function Quote(_ref) {
   var quote = _ref.quote,
       author = _ref.author;
   return _react2.default.createElement(
-    _semanticUiReact.Container,
+    'div',
     null,
     _react2.default.createElement('br', null),
     _react2.default.createElement(
@@ -64812,7 +64866,7 @@ Quote.propTypes = {
 
 exports.default = Quote;
 
-},{"prop-types":511,"react":541,"semantic-ui-react":660}],790:[function(require,module,exports){
+},{"prop-types":511,"react":541,"semantic-ui-react":660}],791:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64869,13 +64923,13 @@ ResumeItem.defaultProps = {
 
 exports.default = ResumeItem;
 
-},{"prop-types":511,"react":541,"semantic-ui-react":660}],791:[function(require,module,exports){
+},{"prop-types":511,"react":541,"semantic-ui-react":660}],792:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Quote = exports.ResumeItem = undefined;
+exports.Price = exports.Quote = exports.ResumeItem = undefined;
 
 var _ResumeItem = require('./ResumeItem');
 
@@ -64885,12 +64939,17 @@ var _Quote = require('./Quote');
 
 var _Quote2 = _interopRequireDefault(_Quote);
 
+var _Price = require('./Price');
+
+var _Price2 = _interopRequireDefault(_Price);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.ResumeItem = _ResumeItem2.default;
 exports.Quote = _Quote2.default;
+exports.Price = _Price2.default;
 
-},{"./Quote":789,"./ResumeItem":790}],792:[function(require,module,exports){
+},{"./Price":789,"./Quote":790,"./ResumeItem":791}],793:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -64937,7 +64996,7 @@ var ecs = exports.ecs = {
   array: extracurricularsarray
 };
 
-},{}],793:[function(require,module,exports){
+},{}],794:[function(require,module,exports){
 module.exports=[
     {
         "quoteAuthor": "Thomas Edison",
@@ -71501,7 +71560,7 @@ module.exports=[
     }
 ]
 
-},{}],794:[function(require,module,exports){
+},{}],795:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -71539,7 +71598,7 @@ var Footer = function Footer() {
         { textAlign: 'center', columns: 2 },
         _react2.default.createElement(
           _semanticUiReact.Grid.Column,
-          { textAlign: 'right' },
+          { as: _reactRouterDom.Link, to: '/UCLATriathlon', textAlign: 'right' },
           'UCLA Triathlon'
         ),
         _react2.default.createElement(
@@ -71554,12 +71613,14 @@ var Footer = function Footer() {
 
 exports.default = Footer;
 
-},{"react":541,"react-router-dom":527,"semantic-ui-react":660}],795:[function(require,module,exports){
+},{"react":541,"react-router-dom":527,"semantic-ui-react":660}],796:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -71571,7 +71632,15 @@ var _quotes = require('../constants/quotes.json');
 
 var _quotes2 = _interopRequireDefault(_quotes);
 
+var _semanticUiReact = require('semantic-ui-react');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // const filePath = '../constants/quotes.json';
 // const quotes = $.getJSON(filePath.done());
@@ -71581,13 +71650,61 @@ var quotes = _quotes2.default.filter(function (quote) {
 var random = Math.round(Math.random() * quotes.length);
 var quote = quotes[random];
 
-var QuoteContainer = function QuoteContainer() {
-  return _react2.default.createElement(_components.Quote, { quote: quote.quoteText, author: quote.quoteAuthor });
-};
+var Header = function (_React$PureComponent) {
+  _inherits(Header, _React$PureComponent);
 
-exports.default = QuoteContainer;
+  function Header(props) {
+    _classCallCheck(this, Header);
 
-},{"../components":791,"../constants/quotes.json":793,"react":541}],796:[function(require,module,exports){
+    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+
+    _this.state = {
+      quotevisible: true
+    };
+    _this.switchHeader = _this.switchHeader.bind(_this);
+    return _this;
+  }
+
+  _createClass(Header, [{
+    key: 'switchHeader',
+    value: function switchHeader() {
+      var _this2 = this;
+
+      console.log(this.state.quotevisible);
+      setTimeout(function () {
+        _this2.setState(function (prevState) {
+          return {
+            quotevisible: !prevState.quotevisible
+          };
+        });
+      }, 3000);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _semanticUiReact.Container,
+        { text: true },
+        _react2.default.createElement(
+          _semanticUiReact.Transition,
+          { visible: this.state.quotevisible, animation: 'horizontal flip', duration: 1000, onComplete: this.switchHeader(), unmountOnHide: true },
+          _react2.default.createElement(_components.Quote, { quote: quote.quoteText, author: quote.quoteAuthor })
+        ),
+        _react2.default.createElement(
+          _semanticUiReact.Transition,
+          { visible: !this.state.quotevisible, animation: 'horizontal flip', duration: 1000, onComplete: this.switchHeader(), unmountOnHide: true },
+          _react2.default.createElement(_components.Price, { price: 5, change: 4, direction: 'up' })
+        )
+      );
+    }
+  }]);
+
+  return Header;
+}(_react2.default.PureComponent);
+
+exports.default = Header;
+
+},{"../components":792,"../constants/quotes.json":794,"react":541,"semantic-ui-react":660}],797:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -71650,21 +71767,21 @@ Section.propTypes = {
 
 exports.default = Section;
 
-},{"../components":791,"prop-types":511,"react":541,"semantic-ui-react":660}],797:[function(require,module,exports){
+},{"../components":792,"prop-types":511,"react":541,"semantic-ui-react":660}],798:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Footer = exports.QuoteContainer = exports.Section = undefined;
+exports.Footer = exports.Header = exports.Section = undefined;
 
 var _Section = require('./Section');
 
 var _Section2 = _interopRequireDefault(_Section);
 
-var _QuoteContainer = require('./QuoteContainer');
+var _Header = require('./Header');
 
-var _QuoteContainer2 = _interopRequireDefault(_QuoteContainer);
+var _Header2 = _interopRequireDefault(_Header);
 
 var _Footer = require('./Footer');
 
@@ -71673,10 +71790,44 @@ var _Footer2 = _interopRequireDefault(_Footer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Section = _Section2.default;
-exports.QuoteContainer = _QuoteContainer2.default;
+exports.Header = _Header2.default;
 exports.Footer = _Footer2.default;
 
-},{"./Footer":794,"./QuoteContainer":795,"./Section":796}],798:[function(require,module,exports){
+},{"./Footer":795,"./Header":796,"./Section":797}],799:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var About = function About() {
+  return _react2.default.createElement(
+    _semanticUiReact.Segment,
+    { raised: true },
+    _react2.default.createElement(
+      _semanticUiReact.Header,
+      { textAlign: 'center' },
+      'About Me:'
+    ),
+    _react2.default.createElement(
+      _semanticUiReact.Container,
+      { text: true },
+      'of his or her background, the same chance America gave him. After working his way through college with the help of scholarships and student loans, Obama moved to Chicago, where he worked with a group of churches to help rebuild communities devastated by the closure of local steel plants. That experience honed his belief in the power of uniting ordinary people around a politics of purpose, in the hard work of citizenship, to bring about positive change. In law school, he became the first African-American president of the Harvard Law Review, then he returned to Illinois to teach constitutional law at the University of Chicago and begin a career in public service, winning seats in the Illinois State Senate and the United States Senate. On November 4, 2008, Barack Obama was elected the 44th President of the United States, winning more votes than any candidate in history. He took office at a moment of crisis unlike any America had seen in decades \u2013 a nation at war, a planet in peril, the American Dream itself threatened by the worst economic calamity since the Great Depression. And yet, despite all manner of political obstruction, Obama\u2019s leadership helped rescue the economy, revitalize the American auto industry, reform the health care system to cover another twenty million Americans, and put the country on a firm course to a clean energy future \u2013 all while overseeing the longest stretch of job creation in American history. On the world stage, Obama\u2019s belief in America\u2019s indispensable leadership and strong, principled diplomacy helped wind down the wars in Iraq and Afghanistan, decimate al Qaeda and eliminate the world\u2019s most wanted terrorists, shut down Iran\u2019s nuclear weapons program, open up a new chapter with the people of Cuba, and unite humanity in coordinated action to combat a changing climate. In times of great challenge and change, President Obama\u2019s leadership ushered in a stronger economy, a more equal society, a nation more secure at home and more respected around the world. The Obama years were ones in which more people not only began to see themselves in the changing face of America, but to see America the way he always has \u2013 as the only place on Earth where so many of our stories could even be possible. Barack Obama and his wife, Michelle, are the proud parents of two daughters, Malia and Sasha.'
+    )
+  );
+};
+
+exports.default = About;
+
+},{"react":541,"semantic-ui-react":660}],800:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -71707,7 +71858,7 @@ var App = function App() {
       _react2.default.createElement(
         _semanticUiReact.Grid.Row,
         null,
-        _react2.default.createElement(_containers.QuoteContainer, null)
+        _react2.default.createElement(_containers.Header, null)
       ),
       _react2.default.createElement(
         _semanticUiReact.Grid.Row,
@@ -71715,7 +71866,7 @@ var App = function App() {
         _react2.default.createElement(
           _semanticUiReact.Grid.Column,
           { width: 2, floated: 'left', textAlign: 'center' },
-          _react2.default.createElement(_reactRouterDom.Route, { component: _views.HomePage })
+          _react2.default.createElement(_reactRouterDom.Route, { component: _views.NavBar })
         ),
         _react2.default.createElement(
           _semanticUiReact.Grid.Column,
@@ -71723,7 +71874,11 @@ var App = function App() {
           _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/Resume', component: _views.Resume })
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _views.HomePage }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/Resume', component: _views.Resume }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/UCLATriathlon', component: _views.Triathlon }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/About', component: _views.About }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/Blog', component: _views.Blog })
           )
         ),
         _react2.default.createElement(_semanticUiReact.Grid.Column, { width: 2, floated: 'left' })
@@ -71739,7 +71894,57 @@ var App = function App() {
 
 exports.default = App;
 
-},{"../containers":797,"../views":801,"react":541,"react-router-dom":527,"semantic-ui-react":660}],799:[function(require,module,exports){
+},{"../containers":798,"../views":807,"react":541,"react-router-dom":527,"semantic-ui-react":660}],801:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Blog = function Blog() {
+  return _react2.default.createElement(
+    'h1',
+    null,
+    'hello'
+  );
+};
+
+exports.default = Blog;
+
+},{"react":541}],802:[function(require,module,exports){
+"use strict";
+
+},{}],803:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var HomePage = function HomePage() {
+  return _react2.default.createElement(_semanticUiReact.Embed, {
+    url: 'https://open.spotify.com/embed/user/1216452780/playlist/7lrHosHPX1PKcO5ufPtUCu',
+    active: true
+  });
+};
+
+exports.default = HomePage;
+
+},{"react":541,"semantic-ui-react":660}],804:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -71756,7 +71961,7 @@ var _semanticUiReact = require('semantic-ui-react');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var HomePage = function HomePage(_ref) {
+var NavBar = function NavBar(_ref) {
   var location = _ref.location;
   return _react2.default.createElement(
     _semanticUiReact.Menu,
@@ -71770,6 +71975,11 @@ var HomePage = function HomePage(_ref) {
       _semanticUiReact.Menu.Item,
       { as: _reactRouterDom.Link, to: '/About', active: location.pathname === '/About' },
       'About'
+    ),
+    _react2.default.createElement(
+      _semanticUiReact.Menu.Item,
+      { as: _reactRouterDom.Link, to: '/Blog', active: location.pathname === '/Blog' },
+      'Blog'
     ),
     _react2.default.createElement(
       _semanticUiReact.Menu.Item,
@@ -71836,9 +72046,9 @@ var HomePage = function HomePage(_ref) {
   );
 };
 
-exports.default = (0, _reactRouterDom.withRouter)(HomePage);
+exports.default = (0, _reactRouterDom.withRouter)(NavBar);
 
-},{"react":541,"react-router-dom":527,"semantic-ui-react":660}],800:[function(require,module,exports){
+},{"react":541,"react-router-dom":527,"semantic-ui-react":660}],805:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -71888,30 +72098,74 @@ var Resume = function Resume() {
 
 exports.default = Resume;
 
-},{"../constants/ResumeInfo":792,"../containers":797,"react":541,"semantic-ui-react":660}],801:[function(require,module,exports){
+},{"../constants/ResumeInfo":793,"../containers":798,"react":541,"semantic-ui-react":660}],806:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Resume = exports.HomePage = exports.App = undefined;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Triathlon = function Triathlon() {
+  return _react2.default.createElement(_semanticUiReact.Embed, {
+    active: true,
+    url: 'https://calendar.google.com/calendar/embed?src=g.ucla.edu_qt43kr70243segdt1lg2okaal8%40group.calendar.google.com&ctz=America%2FLos_Angeles'
+  });
+};
+
+exports.default = Triathlon;
+
+},{"react":541,"semantic-ui-react":660}],807:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Blog = exports.About = exports.Triathlon = exports.HomePage = exports.Resume = exports.NavBar = exports.App = undefined;
 
 var _App = require('./App');
 
 var _App2 = _interopRequireDefault(_App);
 
-var _HomePage = require('./HomePage');
+var _NavBar = require('./NavBar');
 
-var _HomePage2 = _interopRequireDefault(_HomePage);
+var _NavBar2 = _interopRequireDefault(_NavBar);
 
 var _Resume = require('./Resume');
 
 var _Resume2 = _interopRequireDefault(_Resume);
 
+var _HomePage = require('./HomePage');
+
+var _HomePage2 = _interopRequireDefault(_HomePage);
+
+var _Triathlon = require('./Triathlon');
+
+var _Triathlon2 = _interopRequireDefault(_Triathlon);
+
+var _About = require('./About');
+
+var _About2 = _interopRequireDefault(_About);
+
+var _Blog = require('./Blog');
+
+var _Blog2 = _interopRequireDefault(_Blog);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.App = _App2.default;
-exports.HomePage = _HomePage2.default;
+exports.NavBar = _NavBar2.default;
 exports.Resume = _Resume2.default;
+exports.HomePage = _HomePage2.default;
+exports.Triathlon = _Triathlon2.default;
+exports.About = _About2.default;
+exports.Blog = _Blog2.default;
 
-},{"./App":798,"./HomePage":799,"./Resume":800}]},{},[791,790,792,797,796,788,798,799,801,800]);
+},{"./About":799,"./App":800,"./Blog":801,"./HomePage":803,"./NavBar":804,"./Resume":805,"./Triathlon":806}]},{},[792,789,790,791,793,795,796,798,797,788,799,800,801,802,803,807,804,805,806]);

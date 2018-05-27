@@ -11,7 +11,7 @@ const Footer = () => (
         </Grid.Column>
       </Grid.Row>
       <Grid.Row textAlign="center" columns={2}>
-        <Grid.Column textAlign="right">
+        <Grid.Column as={Link} to="/UCLATriathlon" textAlign="right">
           UCLA Triathlon
         </Grid.Column>
         <Grid.Column textAlign="left">

@@ -1,5 +1,5 @@
 import Section from './Section';
-import QuoteContainer from './QuoteContainer';
+import Header from './Header';
 import Footer from './Footer';
 
-export { Section, QuoteContainer, Footer };
+export { Section, Header, Footer };

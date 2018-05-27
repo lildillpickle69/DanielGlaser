@@ -1,13 +1,13 @@
 import React from 'react';
-import { Header, Container } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const Quote = ({ quote, author }) => (
-  <Container>
+  <div>
     <br />
     <Header size="large" textAlign="center">"{quote}"</Header>
     <Header size="medium" textAlign="center">-{author}</Header>
-  </Container>
+  </div>
 );
 
 Quote.propTypes = {
